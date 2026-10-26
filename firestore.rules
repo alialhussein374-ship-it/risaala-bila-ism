@@ -1,0 +1,44 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isString(v) { return v is string; }
+    function validText(v) { return isString(v) && v.size() >= 3 && v.size() <= 1000; }
+
+    match /messages/{messageId} {
+      // Public can only read approved messages. Pending messages are not readable from the website.
+      allow read: if resource.data.status == "approved";
+
+      // Anyone may submit a new pending message with only the permitted fields.
+      allow create: if request.resource.data.keys().hasOnly(['text', 'status', 'createdAt'])
+        && validText(request.resource.data.text)
+        && request.resource.data.status == "pending"
+        && request.resource.data.createdAt == request.time;
+
+      // All moderation/edit/delete operations are done by the owner in Firebase Console
+      // or by a trusted server environment, never by the public website.
+      allow update, delete: if false;
+    }
+
+    match /reports/{reportId} {
+      // Reports contain no user identity; only a trusted owner/server should read them.
+      allow read: if false;
+      allow create: if request.resource.data.keys().hasOnly([
+          'messageId', 'reason', 'details', 'createdAt', 'status'
+        ])
+        && isString(request.resource.data.messageId)
+        && request.resource.data.messageId.size() <= 150
+        && isString(request.resource.data.reason)
+        && request.resource.data.reason.size() >= 2
+        && request.resource.data.reason.size() <= 100
+        && isString(request.resource.data.details)
+        && request.resource.data.details.size() <= 300
+        && request.resource.data.status == "new"
+        && request.resource.data.createdAt == request.time;
+      allow update, delete: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
