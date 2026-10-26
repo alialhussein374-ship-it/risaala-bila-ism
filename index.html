@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0b10">
+  <meta name="description" content="رسالة بلا اسم — مساحة لكتابة ما يصعب قوله، من إنشاء علي | Ali.">
+  <title>رسالة بلا اسم | علي Ali</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <header class="topbar wrap">
+    <a class="brand" href="#" aria-label="رسالة بلا اسم - الرئيسية"><span class="brand-mark">✉</span><span>رسالة <b>بلا اسم</b></span></a>
+    <a class="creator" href="#about">من إنشاء <strong>علي | Ali</strong></a>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="eyebrow"><span class="pulse"></span> مساحة للكلام الذي لا يُقال</div>
+      <h1>اكتبها…<br><span>واترك الاسم خارج الحكاية.</span></h1>
+      <p class="hero-copy">اعتراف، عتاب، امتنان، أو فكرة علقت في بالك. اكتب رسالتك من دون اسم ظاهر، ودعها تصل إلى مساحة آمنة قدر الإمكان.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#send">اكتب رسالة <span>↙</span></a>
+        <a class="btn btn-ghost" href="#inbox">اقرأ الرسائل المنشورة</a>
+      </div>
+      <div class="privacy-note"><span>◈</span> الرسائل الجديدة لا تظهر للناس إلا بعد مراجعتها والموافقة عليها.</div>
+    </section>
+
+    <section id="send" class="panel compose-panel">
+      <div class="section-heading"><div><div class="eyebrow">01 / اترك أثرًا</div><h2>رسالتك المجهولة</h2></div><span class="line-icon">✎</span></div>
+      <form id="message-form">
+        <label for="message">شو حابب تقول؟</label>
+        <textarea id="message" name="message" minlength="3" maxlength="1000" required placeholder="اكتب رسالتك هون… بدون أسماء كاملة أو معلومات خاصة عنك أو عن غيرك."></textarea>
+        <div class="form-meta"><span>من 3 إلى 1000 حرف</span><span id="char-count">0 / 1000</span></div>
+        <label class="check-row"><input id="consent" type="checkbox" required><span>أوافق على أن تبقى رسالتي قيد المراجعة، ولا تُنشر إلا بعد الموافقة عليها.</span></label>
+        <button id="send-button" class="btn btn-primary btn-full" type="submit">إرسال للمراجعة <span>↗</span></button>
+        <p id="form-status" class="status" role="status" aria-live="polite"></p>
+        <p class="fine-print">لا تكتب كلمات مرور أو أرقام هواتف أو عناوين أو معلومات تعريفية. إخفاء الاسم الظاهر لا يضمن إخفاء الهوية عن مزوّد الخدمة أو سجلات الشبكة.</p>
+      </form>
+    </section>
+
+    <section id="inbox" class="inbox-section">
+      <div class="section-heading"><div><div class="eyebrow">02 / ما سُمح له بالظهور</div><h2>صندوق الرسائل</h2><p class="muted">تظهر هنا الرسائل التي وافق صاحب الموقع على نشرها فقط.</p></div><span class="inbox-count" id="message-count">— رسالة</span></div>
+      <div id="messages-list" class="messages-list"><div class="empty-state"><span class="loader"></span><p>عم نفتّش عن الرسائل المنشورة…</p></div></div>
+      <button id="load-more" class="btn btn-ghost btn-full hidden" type="button">عرض المزيد</button>
+    </section>
+
+    <section id="about" class="about-card">
+      <div class="about-symbol">◌</div>
+      <div><h2>مساحة مجهولة، ومسؤولية واضحة.</h2><p>هذا الموقع مساحة للتعبير، وليس مكانًا للتهديد أو التشهير أو نشر معلومات الآخرين. يمكنك الإبلاغ عن أي رسالة منشورة تبدو مسيئة.</p><p class="signature">علي <span>|</span> Ali</p></div>
+    </section>
+  </main>
+
+  <footer class="wrap footer"><span>رسالة بلا اسم © <span id="year"></span></span><span>تجربة مجتمعية من إنشاء علي | Ali</span></footer>
+
+  <dialog id="report-dialog" class="report-dialog">
+    <form id="report-form" method="dialog">
+      <button class="dialog-close" type="button" id="close-report" aria-label="إغلاق">×</button>
+      <div class="eyebrow">إبلاغ عن محتوى</div><h2>شو المشكلة بالرسالة؟</h2>
+      <p class="muted">الإبلاغ لا ينشر هويتك. لا تضف معلومات شخصية في تفاصيل البلاغ.</p>
+      <input type="hidden" id="report-message-id">
+      <label for="report-reason">سبب الإبلاغ</label>
+      <select id="report-reason" required>
+        <option value="">اختر سببًا</option><option>إساءة أو تنمّر</option><option>تهديد أو تحريض</option><option>معلومات شخصية أو تشهير</option><option>محتوى غير مناسب</option><option>سبب آخر</option>
+      </select>
+      <label for="report-details">تفاصيل إضافية (اختياري)</label>
+      <textarea id="report-details" maxlength="300" placeholder="تفاصيل مختصرة…"></textarea>
+      <button class="btn btn-primary btn-full" type="submit">إرسال البلاغ</button>
+      <p id="report-status" class="status" role="status" aria-live="polite"></p>
+    </form>
+  </dialog>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
